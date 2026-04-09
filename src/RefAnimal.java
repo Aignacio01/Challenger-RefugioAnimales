@@ -47,6 +47,8 @@ public class RefAnimal {
             case 4 -> {
                 System.out.println("Animales disponibles:");
                 // Aquí se mostrarían los animales disponibles
+                mostrarAnimalesDisponibles(estadoAnimal);
+            
             }
             case 5 -> {
                 System.out.println("Animales adoptados:");
@@ -71,5 +73,23 @@ public class RefAnimal {
         System.out.print("Enter the age of the animal: ");
         int age = sc.nextInt(); 
 
+
+
+    }
+    public static void mostrarAnimalesDisponibles(Map<String, String> estadoAnimal) {
+        // mostramos un mensaje si el campo del estado esta vacio.
+                if (estadoAnimal.isEmpty()) {
+                    System.out.println(" No hay animales registrados. ");
+
+                }else {
+                    // reccoremos el mapa
+                    estadoAnimal.forEach((nombre, estado ) -> {
+                        // mostramos solo si hay animales disponibles
+                        if (estado.equalsIgnoreCase("disponible")) {
+                            System.out.println(" - " + nombre);
+                        }
+                    });
+
+                }
     }
 }
