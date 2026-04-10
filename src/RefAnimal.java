@@ -84,16 +84,44 @@ public class RefAnimal {
                     contadorEspecies++;
                     System.out.println("Especie registrada correctamente.");
                 }
-                case 3 -> {//felipe
-                    System.out.print("Ingresa el ID del animal a marcar como adoptado: ");
-                    int idAnimal = sc.nextInt();
-                    if (idAnimal < 1 || idAnimal > contadorAnimales) {
-                        System.out.println("Error: ID inválido.");
-                    } else if (estados[idAnimal - 1].equalsIgnoreCase("Adoptado")) {
-                        System.out.println("Error: El animal ya está adoptado.");
+
+                case 3 -> { // Felipe
+                    System.out.println("\n=== ADOPTAR UN ANIMAL ===");
+
+                    System.out.println("Animales esperando un hogar:");
+                    boolean hayDisponibles = false;
+
+                    for (int i = 0; i < contadorAnimales; i++) {
+                        if (estados[i].equalsIgnoreCase("Disponible")) {
+                            System.out.println("- " + animales[i]);
+                            hayDisponibles = true;
+                        }
+                    }
+
+                    if (!hayDisponibles) {
+                        System.out.println("No hay animales disponibles en este momento.");
                     } else {
-                        estados[idAnimal - 1] = "Adoptado";
-                        System.out.println("Animal marcado como adoptado.");
+                        System.out.print("\nEscribe el nombre del animal a adoptar: ");
+                        String nombreAAdoptar = sc.next().trim();
+
+                        boolean encontrado = false;
+                        for (int i = 0; i < contadorAnimales; i++) {
+                            if (animales[i].equalsIgnoreCase(nombreAAdoptar)) {
+                                encontrado = true;
+
+                                if (estados[i].equalsIgnoreCase("Adoptado")) {
+                                    System.out.println("Error: " + nombreAAdoptar + " ya fue adoptado previamente.");
+                                } else {
+                                    estados[i] = "Adoptado";
+                                    System.out.println("Exito: " + nombreAAdoptar + " ha sido adoptado.");
+                                }
+                                break;
+                            }
+                        }
+
+                        if (!encontrado) {
+                            System.out.println("Error: Ese animal no esta registrado.");
+                        }
                     }
                 }
                 case 4 -> {//Allan
